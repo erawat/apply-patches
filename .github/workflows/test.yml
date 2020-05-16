@@ -6,12 +6,11 @@ on:
       - master
 
 jobs:
-  # test action works running from workflow  
+
   test:
     runs-on: ubuntu-latest
     steps:
     - uses: erawat/apply-patches@master
-    - uses: ./
       with:
         owner: 'compucorp'
         repo: 'civicrm-core'
