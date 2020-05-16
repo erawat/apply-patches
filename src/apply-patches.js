@@ -7,13 +7,13 @@ async function run() {
     const workspace = process.env.GITHUB_WORKSPACE;
     const owner = core.getInput('owner', { required: true });
     const repo = core.getInput('repo', { required: true });
-    const branch = core.getInput('branch', { required: false }) === 'true';
+    const base = core.getInput('base', { required: true });
 
     const github = new GitHub(process.env.GITHUB_TOKEN);
     const pullRequests = await github.pulls.list({
       owner: owner,
       repo: repo,
-      base: branch,
+      base: base,
       mediaType: {
         format: "diff"
       }

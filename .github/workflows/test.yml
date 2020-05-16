@@ -19,4 +19,4 @@ jobs:
       with:
         owner: 'compucorp'
         repo: 'civicrm-core'
-        branch: '5.19.4-patches'
+        base: '5.19.4-patches'
