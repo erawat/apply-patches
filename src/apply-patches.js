@@ -13,7 +13,7 @@ async function run() {
     const pullRequests = await github.pulls.list({
       owner: owner,
       repo: repo,
-      base: base,
+      head: owner + ':' + base,
       mediaType: {
         format: "diff"
       }
