@@ -2015,7 +2015,7 @@ module.exports = require("https");
 /***/ }),
 
 /***/ 213:
-/***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
+/***/ (function(module, __unusedexports, __webpack_require__) {
 
 const core = __webpack_require__(470);
 const { GitHub, context } = __webpack_require__(469);
@@ -2024,7 +2024,7 @@ async function run() {
 
   try{
     const workspace = process.env.GITHUB_WORKSPACE;
-    const owner = core.getInput('repo_owner', { required: true });
+    const owner = core.getInput('owner', { required: true });
     const repo = core.getInput('repo', { required: true });
     const branch = core.getInput('branch', { required: false }) === 'true';
 
@@ -2044,7 +2044,7 @@ async function run() {
   }
 }
 
-run();
+module.exports = run;
 
 
 /***/ }),
