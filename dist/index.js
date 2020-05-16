@@ -2029,7 +2029,7 @@ async function run() {
     const branch = core.getInput('branch', { required: false }) === 'true';
 
     const github = new GitHub(process.env.GITHUB_TOKEN);
-    const pullRequests = await github.pull.list({
+    const pullRequests = await github.pulls.list({
       owner: owner,
       repo: repo,
       base: branch,
