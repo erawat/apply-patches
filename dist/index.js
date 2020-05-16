@@ -34,7 +34,7 @@ module.exports =
 /******/ 	// the startup function
 /******/ 	function startup() {
 /******/ 		// Load entry module and return exports
-/******/ 		return __webpack_require__(104);
+/******/ 		return __webpack_require__(31);
 /******/ 	};
 /******/
 /******/ 	// run startup
@@ -43,6 +43,16 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ 31:
+/***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
+
+const run = __webpack_require__(213);
+
+run();
+
+
+/***/ }),
+
 /***/ 87:
 /***/ (function(module) {
 
@@ -50,22 +60,17 @@ module.exports = require("os");
 
 /***/ }),
 
-/***/ 104:
+/***/ 213:
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
 const core = __webpack_require__(470);
-const wait = __webpack_require__(949);
-
 
 // most @actions toolkit packages have async methods
 async function run() {
   try { 
+
     const ms = core.getInput('milliseconds');
     console.log(`Waiting ${ms} milliseconds ...`)
-
-    core.debug((new Date()).toTimeString())
-    wait(parseInt(ms));
-    core.debug((new Date()).toTimeString())
 
     core.setOutput('time', new Date().toTimeString());
   } 
@@ -340,24 +345,6 @@ exports.group = group;
 /***/ (function(module) {
 
 module.exports = require("path");
-
-/***/ }),
-
-/***/ 949:
-/***/ (function(module) {
-
-let wait = function(milliseconds) {
-  return new Promise((resolve, reject) => {
-    if (typeof(milliseconds) !== 'number') { 
-      throw new Error('milleseconds not a number'); 
-    }
-
-    setTimeout(() => resolve("done!"), milliseconds)
-  });
-}
-
-module.exports = wait;
-
 
 /***/ })
 

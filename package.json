@@ -1,34 +1,37 @@
 {
-  "name": "javascript-action",
+  "name": "apply-patches-action",
   "version": "1.0.0",
-  "description": "JavaScript Action Template",
-  "main": "index.js",
+  "description": "Apply patches from Github Repository",
+  "main": "dist/index.js",
   "scripts": {
-    "lint": "eslint index.js",
-    "package": "ncc build index.js -o dist",
-    "test": "eslint index.js && jest"
+    "lint": "eslint 'src/**.js' --fix",
+    "build": "ncc build src/main.js",
+    "precommit": "npm run build && git add dist/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
+    "url": "git+https://github.com/erawat/apply-patches-action.git"
   },
   "keywords": [
     "GitHub",
     "Actions",
     "JavaScript"
   ],
-  "author": "GitHub",
+  "author": "Erawat Chamanont",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
+    "url": "https://github.com/erawat/apply-patches-action/issues"
   },
-  "homepage": "https://github.com/actions/javascript-action#readme",
+  "homepage": "https://github.com/erawat/apply-patches-action#readme",
   "dependencies": {
-    "@actions/core": "^1.1.1"
+    "@actions/core": "^1.2.4",
+    "@actions/exec": "^1.0.4",
+    "@actions/github": "^2.2.0",
+    "@actions/io": "^1.0.2"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.20.5",
-    "eslint": "^6.3.0",
-    "jest": "^24.9.0"
+    "@zeit/ncc": "^0.21.1",
+    "eslint": "^7.0.0",
+    "jest": "^26.0.1"
   }
 }
