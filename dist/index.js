@@ -2044,6 +2044,8 @@ async function run() {
   }
 }
 
+run();
+
 
 /***/ }),
 
