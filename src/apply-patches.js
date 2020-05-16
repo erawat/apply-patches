@@ -5,7 +5,7 @@ async function run() {
 
   try{
     const workspace = process.env.GITHUB_WORKSPACE;
-    const owner = core.getInput('repo_owner', { required: true });
+    const owner = core.getInput('owner', { required: true });
     const repo = core.getInput('repo', { required: true });
     const branch = core.getInput('branch', { required: false }) === 'true';
 
@@ -25,4 +25,4 @@ async function run() {
   }
 }
 
-run();
+module.exports = run;
