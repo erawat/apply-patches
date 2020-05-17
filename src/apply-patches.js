@@ -34,7 +34,7 @@ async function run() {
 
     const {
       data: { id: prID, diff_url: diffUrl, patch_url: patch_url }
-    } = pullRequestsResponse;
+    } = pullRequestsResponse.data;
 
     console.log(data);
     ;
