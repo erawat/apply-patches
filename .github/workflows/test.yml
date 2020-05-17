@@ -16,7 +16,7 @@ jobs:
     - name: Build CiviCRM profile
       run: | 
         mkdir build
-        git clone https://https://github.com/civicrm/civicrm-core.git build/civicrm-core
+        git clone https://github.com/civicrm/civicrm-core.git build/civicrm-core
         cd build && ls -la
         cd civicrm-core && ls -la
     
