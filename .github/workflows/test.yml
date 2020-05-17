@@ -18,7 +18,8 @@ jobs:
         mkdir build
         git clone -b 5.24.0 --depth 1 https://github.com/civicrm/civicrm-core.git build/civicrm-core
     
-    - uses: ./
+    - name: Run test
+      uses: ./
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
