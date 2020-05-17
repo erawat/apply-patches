@@ -15,8 +15,10 @@ jobs:
 
     - name: Build CiviCRM profile
       run: | 
-        mkdir tests/build
-        git clone https://https://github.com/civicrm/civicrm-core.git 
+        mkdir build
+        git clone https://https://github.com/civicrm/civicrm-core.git build/civicrm-core
+        cd build && ls -la
+        cd civicrm-core && ls -la
     
     - uses: ./
       env:
@@ -25,4 +27,4 @@ jobs:
         owner: 'erawat'
         repo: 'civicrm-core'
         base: '5.24.6-patches'
-        to_patch_dir: 'tests/build/civicrm-core' 
+        to_patch_dir: 'build/civicrm-core' 
