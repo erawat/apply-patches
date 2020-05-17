@@ -2350,8 +2350,8 @@ async function run() {
    }
 
    pullRequests.forEach(function (data) {
-    const { patchUrl: patch_url } = data;
-    applyPatch(patchUrl);
+    const { patch_url: patchUrl } = data;
+    applyPatch(patchUrl, toPatchDir);
    });
 
   } 
@@ -2360,8 +2360,9 @@ async function run() {
   }
 }
 
-async function applyPatch (patchUrl) {
-  await exec.exec(`curl ${patch_url} | patch -p1 -i ${patch_url}`, null, { cwd: toPatchDir });
+async function applyPatch (patchUrl, toPatchDir) {
+  console.log(patchUrl);
+  await exec.exec(`curl ${patchUrl} | patch -p1 -i ${patchUrl}`, null, { cwd: toPatchDir });
 }
 
 module.exports = run;
