@@ -34,14 +34,19 @@ async function run() {
    }
 
    pullRequests.forEach(function (data) {
-    const { patch_url} = data
-    await exec.exec(`curl ${patch_url} | patch -p1 -i ${patch_url}`, null, { cwd: toPatchDir });
+    const { patch_url: patchUrl } = data;
+    applyPatch(patchUrl, toPatchDir);
    });
 
   } 
   catch (error) {
     core.setFailed(error.message);
   }
+}
+
+async function applyPatch (patchUrl, toPatchDir) {
+  console.log(patchUrl);
+  await exec.exec(`curl ${patchUrl} | patch -p1 -i ${patchUrl}`, null, { cwd: toPatchDir });
 }
 
 module.exports = run;
