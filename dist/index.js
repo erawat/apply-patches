@@ -2033,7 +2033,7 @@ async function run() {
       owner: owner,
       repo: repo,
       base: base,
-      state: closed,
+      state: 'closed',
     });
     console.log(pullRequests);
   } 
