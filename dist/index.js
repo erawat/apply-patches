@@ -2026,15 +2026,17 @@ async function run() {
   try{
     const workspace = process.env.GITHUB_WORKSPACE;
     const workspacePath = path.resolve(workspace);
-    const toPatchDir =  workspacePath + path.sep + core.getInput('to_path_dir', {required: false}) === '';
+    const toPatchDir =  workspacePath + path.sep + core.getInput('to_path_dir', {required: false});
     const owner = core.getInput('owner', { required: true });
     const repo = core.getInput('repo', { required: true });
     const base = core.getInput('base', { required: false });
-    const state = core.getInput('state', { required: false }) === 'closed';
+    const state = core.getInput('state', { required: false });
     //const toPatchDir = core.getInput('to_path_dir', { required: false} === path.resolve(workspace));
     console.log(workspacePath);
     console.log(toPatchDir);
     console.log(state);
+
+    
 
     const github = new GitHub(process.env.GITHUB_TOKEN);
     const pullRequests = await github.pulls.list({
