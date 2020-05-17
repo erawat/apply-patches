@@ -9,7 +9,7 @@ async function run() {
     const workspacePath = path.resolve(workspace);
 
     const inputToPatchDir =  core.getInput('to_patch_dir', {required: false});
-    const toPatchDir = inputToPatchDir != '' ? workspacePath + path.sep + toPatchDir : workspacePath;
+    const toPatchDir = inputToPatchDir != '' ? workspacePath + path.sep + inputToPatchDir : workspacePath;
 
     console.log(workspacePath);
     console.log(toPatchDir);
