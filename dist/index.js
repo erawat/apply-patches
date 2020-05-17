@@ -2335,7 +2335,6 @@ async function run() {
     const inputState = core.getInput('state', { required: false });
     const state = inputState != '' ? inputState : 'all';
 
-
     const github = new GitHub(process.env.GITHUB_TOKEN);
     const pullRequestsResponse = await github.pulls.list({
       owner: inputOwner,
@@ -2362,7 +2361,7 @@ async function run() {
 
 async function applyPatch (patchUrl, toPatchDir) {
   console.log(patchUrl);
-  await exec.exec(`curl ${patchUrl} | patch -p1 -i ${patchUrl}`, null, { cwd: toPatchDir });
+  await exec.exec(`curl -s ${patchUrl} > /dev/null | patch -p1 -i ${patchUrl}`, null, { cwd: toPatchDir });
 }
 
 module.exports = run;
