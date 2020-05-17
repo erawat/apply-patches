@@ -34,6 +34,7 @@ async function run() {
 
    pullRequests.forEach(function (data) {
     const { id, diff_url: diffUrl } = data;
+    console.log(diffUrl);
     applyPatch(id, diffUrl, toPatchDir);
    });
 

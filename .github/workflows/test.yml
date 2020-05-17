@@ -13,12 +13,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Build CiviCRM profile
+    - name: Build CiviCRM dir
       run: | 
         mkdir build
         git clone -b 5.24.0 --depth 1 https://github.com/civicrm/civicrm-core.git build/civicrm-core
         cd build/civicrm-core
-        cat CRM/ACL/BAO/ACL.php
     
     - name: Run test
       uses: ./
@@ -31,7 +30,3 @@ jobs:
         state: 'closed'
         to_patch_dir: 'build/civicrm-core' 
 
-    - name: Build CiviCRM profile
-      run: |    
-        cd build/civicrm-core
-        cat CRM/ACL/BAO/ACL.php
