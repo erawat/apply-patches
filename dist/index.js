@@ -2019,27 +2019,35 @@ module.exports = require("https");
 
 const core = __webpack_require__(470);
 const { GitHub, context } = __webpack_require__(469);
+const path = __webpack_require__(622);
 
 async function run() {
 
   try{
     const workspace = process.env.GITHUB_WORKSPACE;
+    const workspacePath = path.resolve(workspace);
+    const toPatchDir =  workspacePath + path.sep + core.getInput('to_path_dir', {required: false}) === '';
     const owner = core.getInput('owner', { required: true });
     const repo = core.getInput('repo', { required: true });
-    const base = core.getInput('base', { required: false } === 'closed');
+    const base = core.getInput('base', { required: false });
+    const state = core.getInput('state', { required: false }) === 'closed';
+    //const toPatchDir = core.getInput('to_path_dir', { required: false} === path.resolve(workspace));
+    console.log(workspacePath);
+    console.log(toPatchDir);
+    console.log(state);
 
     const github = new GitHub(process.env.GITHUB_TOKEN);
     const pullRequests = await github.pulls.list({
       owner: owner,
       repo: repo,
       base: base,
-      state: 'closed',
+      state: state,
     });
 
     //if (pullRequests.data === '') {
-    //  throw ('no pull requests found');
+    //  throw new Error ('no pull requests found');
    // }
-   
+
     console.log(pullRequests);
   } 
   catch (error) {
