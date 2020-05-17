@@ -2026,23 +2026,29 @@ async function run() {
   try{
     const workspace = process.env.GITHUB_WORKSPACE;
     const workspacePath = path.resolve(workspace);
-    const toPatchDir =  workspacePath + path.sep + core.getInput('to_path_dir', {required: false});
-    const owner = core.getInput('owner', { required: true });
-    const repo = core.getInput('repo', { required: true });
-    const base = core.getInput('base', { required: false });
-    const state = core.getInput('state', { required: false });
-    //const toPatchDir = core.getInput('to_path_dir', { required: false} === path.resolve(workspace));
+
+    const inputToPatchDir =  core.getInput('to_path_dir', {required: false});
+    const toPatchDir = inputToPatchDir != '' ? workspacePath + path.sep + toPatchDir : workspacePath;
+
     console.log(workspacePath);
     console.log(toPatchDir);
-    console.log(state);
 
+    const inputOwner = core.getInput('owner', { required: true });
+    const inputRepo = core.getInput('repo', { required: true });
+    const inputBase = core.getInput('base', { required: false });
+    const inputState = core.getInput('state', { required: false });
+    console.log(workspacePath);
+    console.log(toPatchDir);
     
+    const state = inputState != '' ? inputState : 'all';
+
+    console.log(state);
 
     const github = new GitHub(process.env.GITHUB_TOKEN);
     const pullRequests = await github.pulls.list({
-      owner: owner,
-      repo: repo,
-      base: base,
+      owner: inputOwner,
+      repo: inputRepo,
+      base: inputBase,
       state: state,
     });
 

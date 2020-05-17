@@ -26,4 +26,5 @@ jobs:
         owner: 'erawat'
         repo: 'civicrm-core'
         base: '5.25.0-patches'
+        state: 'closed'
         to_patch_dir: 'build/civicrm-core' 
