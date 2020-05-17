@@ -2030,33 +2030,34 @@ async function run() {
     const inputToPatchDir =  core.getInput('to_patch_dir', {required: false});
     const toPatchDir = inputToPatchDir != '' ? workspacePath + path.sep + inputToPatchDir : workspacePath;
 
-    console.log(workspacePath);
-    console.log(toPatchDir);
-
     const inputOwner = core.getInput('owner', { required: true });
     const inputRepo = core.getInput('repo', { required: true });
     const inputBase = core.getInput('base', { required: false });
-    const inputState = core.getInput('state', { required: false });
-    console.log(workspacePath);
-    console.log(toPatchDir);
     
+    const inputState = core.getInput('state', { required: false });
     const state = inputState != '' ? inputState : 'all';
 
-    console.log(state);
 
     const github = new GitHub(process.env.GITHUB_TOKEN);
-    const pullRequests = await github.pulls.list({
+    const pullRequestsResponse = await github.pulls.list({
       owner: inputOwner,
       repo: inputRepo,
       base: inputBase,
       state: state,
     });
 
+
     //if (pullRequests.data === '') {
     //  throw new Error ('no pull requests found');
    // }
 
-    console.log(pullRequests);
+    const {
+      data: { id: prID, diff_url: diffUrl, patch_url: patch_url }
+    } = pullRequestsResponse;
+
+    console.log(data);
+    ;
+
   } 
   catch (error) {
     core.setFailed(error.message);
