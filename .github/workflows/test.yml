@@ -6,17 +6,23 @@ on:
       - master
 
 jobs:
-
   test:
     runs-on: ubuntu-latest
     
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+
+    - name: Build CiviCRM profile
+      run: | 
+        mkdir tests/build
+        git clone https://https://github.com/civicrm/civicrm-core.git 
+    
     - uses: ./
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        owner: 'compucorp'
+        owner: 'erawat'
         repo: 'civicrm-core'
-        base: '5.19.4-patches'
+        base: '5.24.6-patches'
+        to_patch_dir: 'tests/build/civicrm-core' 
