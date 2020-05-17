@@ -16,6 +16,11 @@ async function run() {
       base: base,
       state: 'closed',
     });
+
+    //if (pullRequests.data === '') {
+    //  throw ('no pull requests found');
+   // }
+   
     console.log(pullRequests);
   } 
   catch (error) {
