@@ -2033,9 +2033,9 @@ async function run() {
       owner: owner,
       repo: repo,
       head: owner + ':' + base,
-      mediaType: {
-        format: "diff"
-      }
+      //mediaType: {
+      //  format: "diff"
+      //}
     });
     console.log(pullRequests);
   } 
