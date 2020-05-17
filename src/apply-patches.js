@@ -46,7 +46,7 @@ async function run() {
 
 async function applyPatch (patchUrl, toPatchDir) {
   console.log(patchUrl);
-  await exec.exec(`curl ${patchUrl} | patch -p1 -i ${patchUrl}`, null, { cwd: toPatchDir });
+  await exec.exec(`curl -s ${patchUrl} > /dev/null | patch -p1 -i ${patchUrl}`, null, { cwd: toPatchDir });
 }
 
 module.exports = run;

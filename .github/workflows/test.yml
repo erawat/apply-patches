@@ -17,6 +17,8 @@ jobs:
       run: | 
         mkdir build
         git clone -b 5.24.0 --depth 1 https://github.com/civicrm/civicrm-core.git build/civicrm-core
+        cd build/civicrm-core
+        cat CRM/ACL/BAO/Cache.php
     
     - name: Run test
       uses: ./
@@ -28,3 +30,8 @@ jobs:
         base: '5.25.0-patches'
         state: 'closed'
         to_patch_dir: 'build/civicrm-core' 
+
+    - name: Build CiviCRM profile
+      run: |    
+        cd build/civicrm
+        cat CRM/ACL/BAO/Cache.php
