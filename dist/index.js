@@ -2046,14 +2046,16 @@ async function run() {
       state: state,
     });
 
+   const data = pullRequestsResponse.data;
+   if (!Array.isArray(data) || !data.length) {
+    throw new Error('No Pull Request found');
+   }
 
-    //if (pullRequests.data === '') {
-    //  throw new Error ('no pull requests found');
-   // }
+  
 
-    const {
-      data: { id: prID, diff_url: diffUrl, patch_url: patch_url }
-    } = pullRequestsResponse.data;
+    //const {
+    //  data: { id: prID, diff_url: diffUrl, patch_url: patch_url }
+    //} = pullRequestsResponse.data;
 
     console.log(data);
     ;
