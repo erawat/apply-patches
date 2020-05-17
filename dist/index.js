@@ -2360,14 +2360,8 @@ async function run() {
 }
 
 async function applyPatch (id, diffUrl, workingDir) {
-  try{
-    console.log(workingDir);
-    //pipline does not work
-    //await exec.exec(`curl -Ls ${diffUrl} | git apply -v`, null, { cwd: workingDir });
+  try{ 
     await exec.exec(`curl -Ls ${diffUrl} -o ${id}.diff`, null, { cwd: workingDir });
-    await exec.exec(`pwd`, null, { cwd: workingDir });
-    await exec.exec(`ls -la`, null, { cwd: workingDir });
-    await exec.exec(`cat ${id}.diff`, null, { cwd: workingDir });
     await exec.exec(`git apply ${id}.diff`, null, { cwd: workingDir });
     await exec.exec(`rm ${id}.diff`, null, { cwd: workingDir });
   }
