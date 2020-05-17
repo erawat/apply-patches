@@ -2364,7 +2364,7 @@ async function applyPatch (id, diffUrl, workingDir) {
   console.log(diffUrl);
   console.log(workingDir);
   try{
-    await exec.exec(`curl -Lso > /dev/null ${diffUrl}| git apply -v`, null, { cwd: workingDir });
+    await exec.exec(`curl -Lso > /dev/null ${diffUrl} | git apply -v`, null, { cwd: workingDir });
     //await exec.exec(`ls -la`, null, { cwd: workingDir });
     //await exec.exec(`patch -p1 -i ${id}.patch`, null, { cwd: workingDir });
     //await exec.exec(`rm ${id}.patch`, null, { cwd: workingDir });
