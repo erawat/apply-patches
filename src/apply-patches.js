@@ -1,5 +1,6 @@
 const core = require('@actions/core');
-const { GitHub, context } = require('@actions/github');
+const { GitHub } = require('@actions/github');
+const exec = require('@actions/exec');
 const path = require('path');
 
 async function run() {
@@ -27,19 +28,15 @@ async function run() {
       state: state,
     });
 
-   const data = pullRequestsResponse.data;
-   if (!Array.isArray(data) || !data.length) {
-    throw new Error('No Pull Request found');
+   const pullRequests = pullRequestsResponse.data;
+   if (!Array.isArray(pullRequests) || !pullRequests.length) {
+    throw new Error('No Pull Requests found');
    }
 
-  
-
-    //const {
-    //  data: { id: prID, diff_url: diffUrl, patch_url: patch_url }
-    //} = pullRequestsResponse.data;
-
-    console.log(data);
-    ;
+   pullRequests.forEach(function (data) {
+    const { patch_url} = data
+    await exec.exec(`curl ${patch_url} | patch -p1 -i ${patch_url}`, null, { cwd: toPatchDir });
+   });
 
   } 
   catch (error) {
