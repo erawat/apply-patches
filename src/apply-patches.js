@@ -48,7 +48,7 @@ async function applyPatch (id, patchUrl, workingDir) {
   console.log(patchUrl);
   console.log(workingDir);
   try{
-    await exec.exec(`curl -s ${patchUrl} > ${id}.patch`, null, { cwd: workingDir });
+    await exec.exec(`curl -Ls ${patchUrl} > ${id}.patch`, null, { cwd: workingDir });
     await exec.exec(`ls -la`, null, { cwd: workingDir });
     await exec.exec(`patch -p1 -i ${id}.patch`, null, { cwd: workingDir });
     await exec.exec(`rm ${id}.patch`, null, { cwd: workingDir });
