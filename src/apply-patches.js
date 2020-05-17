@@ -19,7 +19,6 @@ async function run() {
     const inputState = core.getInput('state', { required: false });
     const state = inputState != '' ? inputState : 'all';
 
-
     const github = new GitHub(process.env.GITHUB_TOKEN);
     const pullRequestsResponse = await github.pulls.list({
       owner: inputOwner,

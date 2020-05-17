@@ -33,5 +33,5 @@ jobs:
 
     - name: Build CiviCRM profile
       run: |    
-        cd build/civicrm
+        cd build/civicrm-core
         cat CRM/ACL/BAO/Cache.php
