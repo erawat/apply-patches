@@ -2027,7 +2027,7 @@ async function run() {
     const workspace = process.env.GITHUB_WORKSPACE;
     const workspacePath = path.resolve(workspace);
 
-    const inputToPatchDir =  core.getInput('to_path_dir', {required: false});
+    const inputToPatchDir =  core.getInput('to_patch_dir', {required: false});
     const toPatchDir = inputToPatchDir != '' ? workspacePath + path.sep + toPatchDir : workspacePath;
 
     console.log(workspacePath);
