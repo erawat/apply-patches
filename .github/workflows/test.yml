@@ -16,7 +16,7 @@ jobs:
     - name: Build CiviCRM profile
       run: | 
         mkdir build
-        git clone   5.24.0 --single-branch https://github.com/civicrm/civicrm-core.git build/civicrm-core
+        git clone -b 5.24.0 --depth 1 https://github.com/civicrm/civicrm-core.git build/civicrm-core
     
     - uses: ./
       env:
