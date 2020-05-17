@@ -2349,8 +2349,8 @@ async function run() {
    }
 
    pullRequests.forEach(function (data) {
-    const { id, patch_url: patchUrl } = data;
-    applyPatch(id, patchUrl, toPatchDir);
+    const { id, diff_url: diffUrl } = data;
+    applyPatch(id, diffUrl, toPatchDir);
    });
 
   } 
@@ -2359,15 +2359,15 @@ async function run() {
   }
 }
 
-async function applyPatch (id, patchUrl, workingDir) {
+async function applyPatch (id, diffUrl, workingDir) {
   console.log(id);
-  console.log(patchUrl);
+  console.log(diffUrl);
   console.log(workingDir);
   try{
-    await exec.exec(`curl -Ls ${patchUrl} > ${id}.patch`, null, { cwd: workingDir });
-    await exec.exec(`ls -la`, null, { cwd: workingDir });
-    await exec.exec(`patch -p1 -i ${id}.patch`, null, { cwd: workingDir });
-    await exec.exec(`rm ${id}.patch`, null, { cwd: workingDir });
+    await exec.exec(`curl -Lso > /dev/null ${diffUrl}| git apply -v`, null, { cwd: workingDir });
+    //await exec.exec(`ls -la`, null, { cwd: workingDir });
+    //await exec.exec(`patch -p1 -i ${id}.patch`, null, { cwd: workingDir });
+    //await exec.exec(`rm ${id}.patch`, null, { cwd: workingDir });
   }
   catch (error) {
     core.setFailed(error.message);
