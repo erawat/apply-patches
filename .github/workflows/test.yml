@@ -17,6 +17,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        owner: 'compucorp'
+        owner: 'civicrm'
         repo: 'civicrm-core'
-        base: '5.19.4-patches'
+        base: 'master'
