@@ -14,9 +14,9 @@ async function run() {
       owner: owner,
       repo: repo,
       base: base,
-      //mediaType: {
-      //  format: "diff"
-      //}
+      mediaType: {
+        format: "diff"
+      }
     });
     console.log(pullRequests);
   } 
