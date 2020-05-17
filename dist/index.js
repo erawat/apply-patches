@@ -2033,9 +2033,7 @@ async function run() {
       owner: owner,
       repo: repo,
       base: base,
-      mediaType: {
-        format: "diff"
-      }
+      state: closed,
     });
     console.log(pullRequests);
   } 
