@@ -26,7 +26,7 @@ jobs:
         owner: 'erawat'
         repo: 'civicrm-core'
         base: '5.24.6'
-        head: 5.24.6-patches 
+        head: '5.24.6' 
         path: 'build/civicrm-core' 
     
     - name: Test if patches are applied

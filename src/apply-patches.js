@@ -19,17 +19,9 @@ async function run() {
       base: inputBase,
       head: inputHead,
     });
-
-    console.log(comparedCommitsResponse);
-
-    if (!Array.isArray(comparedCommitsResponse.data) || !comparedCommitsResponse.data.length) {
-      core.setFailed('There isn’t anything to compare.')
-    }
-   
-    comparedCommitsResponse.forEach(function (data) {
-      const { id, diff_url: diffUrl } = data;
-      applyPatch(id, diffUrl);
-    });
+    
+    const { diff_url: diffUrl } = comparedCommitsResponse;
+    applyPatch(diffUrl);
 
   } 
   catch (error) {
@@ -39,6 +31,7 @@ async function run() {
 
 async function applyPatch (id, diffUrl) {
   try{ 
+    let patchFile = 'fork-patch.diff';
     await exec.exec(`curl -Ls ${diffUrl} -o ${id}.diff`);
     await exec.exec(`git apply -v ${id}.diff `);
     await exec.exec(`rm ${id}.diff`);
