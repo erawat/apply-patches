@@ -26,5 +26,5 @@ jobs:
         owner: 'erawat'
         repo: 'civicrm-core'
         base: '5.19'
-        head: '5.19' 
+        head: '5.19.4-patches' 
         path: 'build/civicrm-core' 
