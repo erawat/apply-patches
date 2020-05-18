@@ -2336,7 +2336,7 @@ async function run() {
    // const inputPattchesBranch = core.getInput('patchesBranch', { required: false });
 
     const github = new GitHub(process.env.GITHUB_TOKEN);
-    const comparedCommits = await github.compareCommits({
+    const comparedCommits = await github.repos.compareCommits({
       inputOwner,
       inputRepo,
       inputBase,
