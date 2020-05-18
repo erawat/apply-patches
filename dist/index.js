@@ -2363,14 +2363,12 @@ async function run() {
 async function applyPatch (id, diffUrl, workingDir) {
   try{ 
     await exec.exec(`curl -Ls ${diffUrl} -o ${id}.diff`, null, { cwd: workingDir });
-    await exec.exec(`git apply ${id}.diff`, null, { cwd: workingDir });
+    await exec.exec(`git apply -v ${id}.diff `, null, { cwd: workingDir });
     await exec.exec(`rm ${id}.diff`, null, { cwd: workingDir });
   }
   catch (error) {
     core.setFailed(error.message);
   }
- 
-
 }
 
 module.exports = run;
