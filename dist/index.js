@@ -2345,15 +2345,20 @@ async function run() {
   }
 }
 
+async function getWorkingDir() {
+  const workspace = process.env.GITHUB_WORKSPACE;
+  const workspacePath = path.resolve(workspace);
+
+  const inputPath =  core.getInput('path', {required: false});
+  const workingDir = inputPath != '' ? workspacePath + path.sep + inputPath : workspacePath;
+  return workingDir;
+
+}
+
 async function applyPatch (diffUrl) {
   console.log(diffUrl);
   try{ 
-    const workspace = process.env.GITHUB_WORKSPACE;
-    const workspacePath = path.resolve(workspace);
-
-    const inputPath =  core.getInput('path', {required: false});
-    const workingDir = inputPath != '' ? workspacePath + path.sep + inputPath : workspacePath;
-
+    let workingDir = getWorkingDir();
     let patchFile = 'fork-patch.diff';
     await exec.exec(`curl -Ls ${diffUrl} -o ${patchFile}`, null, { cwd: workingDir });
     await exec.exec(`pwd`), null, { cwd: workingDir };
