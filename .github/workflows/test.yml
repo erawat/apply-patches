@@ -12,12 +12,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
-    - name: Build CiviCRM dir
-      run: | 
-        mkdir build
-        git clone -b 5.24.0 --depth 1 https://github.com/civicrm/civicrm-core.git build/civicrm-core
-        cd build/civicrm-core
     
     - name: Run test
       uses: ./
@@ -26,7 +20,8 @@ jobs:
       with:
         owner: 'erawat'
         repo: 'civicrm-core'
-        base: '5.24.6-patches'
+        baseHead: '5.24.6'
+        patchesBranch: 5.24.6-patches 
         state: 'closed'
         to_patch_dir: 'build/civicrm-core' 
 

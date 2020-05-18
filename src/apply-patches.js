@@ -14,16 +14,23 @@ async function run() {
 
     const inputOwner = core.getInput('owner', { required: true });
     const inputRepo = core.getInput('repo', { required: true });
-    const inputBase = core.getInput('base', { required: false });
+    const inputHead = core.getInput('head', { required: false });
     
-    const inputState = core.getInput('state', { required: false });
-    const state = inputState != '' ? inputState : 'all';
+    const inputPattchesBranch = core.getInput('patchesBranch', { required: false });
 
     const github = new GitHub(process.env.GITHUB_TOKEN);
-    const pullRequestsResponse = await github.pulls.list({
+    const comparedCommits = await github.compareCommits({
+      inputOwner,
+      inputRepo,
+      inputBase,
+      inputPattchesBranch,
+    });
+
+    console.log(comparedCommits)
+    /*const pullRequestsResponse = await github.pulls.list({
       owner: inputOwner,
       repo: inputRepo,
-      base: inputBase,
+      base: inputBranch,
       state: state,
     });
 
