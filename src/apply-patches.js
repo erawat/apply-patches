@@ -20,7 +20,6 @@ async function run() {
       head: inputHead,
     });
     applyPatch(comparedCommitsResponse.data.diff_url);
-
   } 
   catch (error) {
     core.setFailed(error.message);
@@ -33,7 +32,7 @@ function getWorkingDir() {
 
   const inputPath  =  core.getInput('path', {required: false});
 
-  return workspacePath + path.sep + inputPath
+  return workspacePath + path.sep + inputPath;
 
 }
 
