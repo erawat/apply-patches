@@ -12,7 +12,6 @@ async function run() {
     const inputHead = core.getInput('head', { required: true });
     const inputBase = core.getInput('base', { required: true });
 
-
     const github = new GitHub(process.env.GITHUB_TOKEN);
     const comparedCommitsResponse = await github.repos.compareCommits({
       owner: inputOwner,
@@ -20,7 +19,6 @@ async function run() {
       base: inputBase,
       head: inputHead,
     });
-    console.log(comparedCommitsResponse);
     applyPatch(comparedCommitsResponse.data.diff_url);
 
   } 
@@ -29,21 +27,21 @@ async function run() {
   }
 }
 
-async function getWorkingDir() {
+function getWorkingDir() {
   const workspace = process.env.GITHUB_WORKSPACE;
   const workspacePath = path.resolve(workspace);
 
-  const inputPath =  core.getInput('path', {required: false});
-  const workingDir = inputPath != '' ? workspacePath + path.sep + inputPath : workspacePath;
-  return workingDir;
+  const inputPath  =  core.getInput('path', {required: false});
+
+  return workspacePath + path.sep + inputPath
 
 }
 
 async function applyPatch (diffUrl) {
   console.log(diffUrl);
   try{ 
-    let workingDir = getWorkingDir();
-    let patchFile = 'fork-patch.diff';
+    const workingDir = getWorkingDir();
+    const patchFile = 'patch.diff';
     await exec.exec(`curl -Ls ${diffUrl} -o ${patchFile}`, null, { cwd: workingDir });
     await exec.exec(`pwd`), null, { cwd: workingDir };
     await exec.exec(`patch -p1 -i ${patchFile}`, null, { cwd: workingDir });
