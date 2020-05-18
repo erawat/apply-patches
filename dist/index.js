@@ -2336,7 +2336,7 @@ async function run() {
       head: inputHead,
     });
     console.log(comparedCommitsResponse);
-    applyPatch(comparedCommitsResponse.diff_url);
+    applyPatch(comparedCommitsResponse.data.diff_url);
 
   } 
   catch (error) {
