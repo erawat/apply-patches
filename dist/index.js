@@ -2330,17 +2330,17 @@ async function run() {
 
     const inputOwner = core.getInput('owner', { required: true });
     const inputRepo = core.getInput('repo', { required: true });
-    const inputHead = core.getInput('head', { required: false });
-    const inputBase = core.getInput('base', { required: false });
+    const inputHead = core.getInput('head', { required: true });
+    const inputBase = core.getInput('base', { required: true });
 
    // const inputPattchesBranch = core.getInput('patchesBranch', { required: false });
 
     const github = new GitHub(process.env.GITHUB_TOKEN);
     const comparedCommits = await github.repos.compareCommits({
-      inputOwner,
-      inputRepo,
-      inputBase,
-      inputHead,
+      ower: inputOwner,
+      repo: inputRepo,
+      base: inputBase,
+      head: inputHead,
     });
 
     console.log(comparedCommits);
