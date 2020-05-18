@@ -19,7 +19,7 @@ async function run() {
       base: inputBase,
       head: inputHead,
     });
-    
+    console.log(comparedCommitsResponse);
     applyPatch(comparedCommitsResponse.diff_url);
 
   } 
@@ -29,6 +29,7 @@ async function run() {
 }
 
 async function applyPatch (diffUrl) {
+  console.log(diffUrl);
   try{ 
     let patchFile = 'fork-patch.diff';
     await exec.exec(`curl -Ls ${diffUrl} -o ${patchFile}`);
