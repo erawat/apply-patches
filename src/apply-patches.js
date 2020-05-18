@@ -9,12 +9,17 @@ async function run() {
     const version = core.getInput('version');
     const head = version + '-patches';
     const github = new GitHub(process.env.GITHUB_TOKEN);
+
+    console.log(owner);
+    console.log(repo);
     const comparedCommitsResponse = await github.repos.compareCommits({
       owner: owner,
       repo: repo,
       base: version,
       head: head,
     });
+
+    console.log(comparedCommitsResponse);
 
     await applyPatch(comparedCommitsResponse.data.diff_url);
   } 
