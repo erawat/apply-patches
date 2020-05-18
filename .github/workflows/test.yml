@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env: 
-      CIVICRM_VERSION: 5.19
+      CIVICRM_VERSION: 5.9.beta1
     
     steps:
     - name: Checkout
