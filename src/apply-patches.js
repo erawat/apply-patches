@@ -20,16 +20,15 @@ async function run() {
       head: inputHead,
     });
 
-    const data = comparedCommitsResponse.data;
-    if (!Array.isArray(data) || !data.length) {
+    console.log(comparedCommitsResponse);
+
+    if (!Array.isArray(comparedCommitsResponse.data) || !comparedCommitsResponse.data.length) {
      return;
     }
-   
-    data.forEach(function () {
-      const { id, diff_url: diffUrl } = this;
-      applyPatch(id, diffUrl);
-    });
+
     
+   
+
   } 
   catch (error) {
     core.setFailed(error.message);
