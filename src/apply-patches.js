@@ -22,9 +22,9 @@ async function run() {
 
     console.log(comparedCommitsResponse);
 
-    if (!Array.isArray(comparedCommitsResponse.data) || !comparedCommitsResponse.data.length) {
-     return;
-    }
+    //if (!Array.isArray(comparedCommitsResponse.data) || !comparedCommitsResponse.data.length) {
+    // return;
+    //}
    
     comparedCommitsResponse.forEach(function (data) {
       const { id, diff_url: diffUrl } = data;
