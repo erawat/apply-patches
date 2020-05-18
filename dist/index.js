@@ -2321,18 +2321,17 @@ const path = __webpack_require__(622);
 
 async function run() {
   try{
-    const inputOwner = core.getInput('owner', { required: true });
-    const inputRepo = core.getInput('repo', { required: true });
-    const inputHead = core.getInput('head', { required: true });
-    const inputBase = core.getInput('base', { required: true });
-
+    const [owner, repo] = core.getInput('repo').split('/');
+    const version = core.getInput('version');
+    const head = version + '-patches';
     const github = new GitHub(process.env.GITHUB_TOKEN);
     const comparedCommitsResponse = await github.repos.compareCommits({
-      owner: inputOwner,
-      repo: inputRepo,
-      base: inputBase,
-      head: inputHead,
+      owner: owner,
+      repo: repo,
+      base: version,
+      head: head,
     });
+
     await applyPatch(comparedCommitsResponse.data.diff_url);
   } 
   catch (error) {
@@ -2357,7 +2356,10 @@ async function applyPatch (diffUrl) {
 function getWorkingDir() {
   const workspace = process.env.GITHUB_WORKSPACE;
   const workspacePath = path.resolve(workspace);
-  const inputPath  =  core.getInput('path', {required: false});
+  const inputPath  =  core.getInput('path');
+  if (!inputPath) {
+    return workspacePath;
+  }
 
   return workspacePath + path.sep + inputPath;
 }
