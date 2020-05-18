@@ -15,18 +15,20 @@ async function run() {
     const inputOwner = core.getInput('owner', { required: true });
     const inputRepo = core.getInput('repo', { required: true });
     const inputHead = core.getInput('head', { required: false });
-    
-    const inputPattchesBranch = core.getInput('patchesBranch', { required: false });
+    const inputBase = core.getInput('base', { required: false });
+
+   // const inputPattchesBranch = core.getInput('patchesBranch', { required: false });
 
     const github = new GitHub(process.env.GITHUB_TOKEN);
     const comparedCommits = await github.compareCommits({
       inputOwner,
       inputRepo,
       inputBase,
-      inputPattchesBranch,
+      inputHead,
     });
 
-    console.log(comparedCommits)
+    console.log(comparedCommits);
+  
     /*const pullRequestsResponse = await github.pulls.list({
       owner: inputOwner,
       repo: inputRepo,
@@ -43,7 +45,7 @@ async function run() {
     const { id, diff_url: diffUrl } = data;
     console.log(diffUrl);
     applyPatch(id, diffUrl, toPatchDir);
-   });
+   });*/
 
   } 
   catch (error) {

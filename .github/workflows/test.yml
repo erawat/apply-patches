@@ -20,8 +20,7 @@ jobs:
       with:
         owner: 'erawat'
         repo: 'civicrm-core'
-        baseHead: '5.24.6'
-        patchesBranch: 5.24.6-patches 
-        state: 'closed'
+        base: '5.24.6'
+        head: 5.24.6-patches 
         to_patch_dir: 'build/civicrm-core' 
 
