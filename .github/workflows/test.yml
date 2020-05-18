@@ -28,12 +28,3 @@ jobs:
         base: '5.19'
         head: '5.19.4-patches' 
         path: 'build/civicrm-core' 
-    
-    - name: Test if patches are applied
-      working-directory: 'build/civicrm-core' 
-      run: |
-        cat github/workflows/patch.yml
-        cat CRM/ACL/BAO/ACL.php 
-
-          
-
