@@ -29,7 +29,7 @@ async function run() {
   }
 }
 
-async function applyPatch (id, diffUrl) {
+async function applyPatch (diffUrl) {
   try{ 
     let patchFile = 'fork-patch.diff';
     await exec.exec(`curl -Ls ${diffUrl} -o ${patchFile}`);
