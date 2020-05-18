@@ -2349,6 +2349,7 @@ async function applyPatch (diffUrl) {
   try{ 
     let patchFile = 'fork-patch.diff';
     await exec.exec(`curl -Ls ${diffUrl} -o ${patchFile}`);
+    await exec.exec(`pwd`);
     await exec.exec(`git apply -v ${patchFile}`);
     await exec.exec(`rm ${patchFile}`);
   }
