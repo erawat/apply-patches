@@ -2339,7 +2339,7 @@ async function run() {
     console.log(comparedCommitsResponse);
 
     if (!Array.isArray(comparedCommitsResponse.data) || !comparedCommitsResponse.data.length) {
-     return;
+      core.setFailed('There isn’t anything to compare.')
     }
    
     comparedCommitsResponse.forEach(function (data) {
