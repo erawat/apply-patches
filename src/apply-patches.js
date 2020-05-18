@@ -21,7 +21,7 @@ async function run() {
 
     const github = new GitHub(process.env.GITHUB_TOKEN);
     const comparedCommits = await github.repos.compareCommits({
-      ower: inputOwner,
+      owner: inputOwner,
       repo: inputRepo,
       base: inputBase,
       head: inputHead,
