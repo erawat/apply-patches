@@ -1,13 +1,17 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'Apply patch'
+description: 'Apply patch is created for applying a patch generated from Github compare commits'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  repo: 
+    description: 'The repository owner/name. For example, compucorp/civicrm-core'
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps 
-    description: 'The message to output'
+    default:
+  version:  
+      description: 'A tag version of the base branch'
+      required: true
+      default:
+  path:  
+      description: 'Path of working directory'
+      required: fase
 runs:
   using: 'node12'
   main: 'dist/index.js'
