@@ -20,7 +20,6 @@ jobs:
 
     - name: Run test
       uses: ./
-      working-directory: 'build/civicrm-core' 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
@@ -28,11 +27,13 @@ jobs:
         repo: 'civicrm:civicrm-core'
         base: '5.24.6'
         head: 5.24.6-patches 
+        path: 'build/civicrm-core' 
     
-    - name: Test if a patch is applied
+    - name: Test if patches are applied
       working-directory: 'build/civicrm-core' 
       run: |
         cat github/workflows/patch.yml
         cat CRM/ACL/BAO/ACL.php 
+
           
 
