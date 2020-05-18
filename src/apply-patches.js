@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const { GitHub } = require('@actions/github');
 const exec = require('@actions/exec');
-const path = require('path');
+const fs = require('fs')
 
 async function run() {
 
@@ -32,9 +32,9 @@ async function run() {
 async function applyPatch (id, diffUrl) {
   try{ 
     let patchFile = 'fork-patch.diff';
-    await exec.exec(`curl -Ls ${diffUrl} -o ${id}.diff`);
-    await exec.exec(`git apply -v ${id}.diff `);
-    await exec.exec(`rm ${id}.diff`);
+    await exec.exec(`curl -Ls ${diffUrl} -o ${patchFile}`);
+    await exec.exec(`git apply -v ${patchFile}`);
+    await exec.exec(`rm ${patchFile}`);
   }
   catch (error) {
     core.setFailed(error.message);

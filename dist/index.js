@@ -2317,7 +2317,7 @@ module.exports = require("https");
 const core = __webpack_require__(470);
 const { GitHub } = __webpack_require__(469);
 const exec = __webpack_require__(986);
-const path = __webpack_require__(622);
+const fs = __webpack_require__(747)
 
 async function run() {
 
@@ -2335,17 +2335,9 @@ async function run() {
       base: inputBase,
       head: inputHead,
     });
-
-    console.log(comparedCommitsResponse);
-
-    if (!Array.isArray(comparedCommitsResponse.data) || !comparedCommitsResponse.data.length) {
-      core.setFailed('There isn’t anything to compare.')
-    }
-   
-    comparedCommitsResponse.forEach(function (data) {
-      const { id, diff_url: diffUrl } = data;
-      applyPatch(id, diffUrl);
-    });
+    
+    const { diff_url: diffUrl } = comparedCommitsResponse;
+    applyPatch(diffUrl);
 
   } 
   catch (error) {
@@ -2355,9 +2347,10 @@ async function run() {
 
 async function applyPatch (id, diffUrl) {
   try{ 
-    await exec.exec(`curl -Ls ${diffUrl} -o ${id}.diff`);
-    await exec.exec(`git apply -v ${id}.diff `);
-    await exec.exec(`rm ${id}.diff`);
+    let patchFile = 'fork-patch.diff';
+    await exec.exec(`curl -Ls ${diffUrl} -o ${patchFile}`);
+    await exec.exec(`git apply -v ${patchFile}`);
+    await exec.exec(`rm ${patchFile}`);
   }
   catch (error) {
     core.setFailed(error.message);
