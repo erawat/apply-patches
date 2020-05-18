@@ -20,8 +20,7 @@ async function run() {
       head: inputHead,
     });
     
-    const { diff_url: diffUrl } = comparedCommitsResponse;
-    applyPatch(diffUrl);
+    applyPatch(comparedCommitsResponse.diff_url);
 
   } 
   catch (error) {
